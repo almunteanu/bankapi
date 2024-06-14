@@ -4,6 +4,7 @@ import dev.almuntex.bankapi.model.Transaction;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -22,7 +23,7 @@ public class TransactionService {
         return transactions;
     }
 
-    public Transaction create(Integer amount, String reference) {
+    public Transaction create(BigDecimal amount, String reference) {
         Transaction transaction = new Transaction(amount, reference, bankSlogan);
         transactions.add(transaction);
         return transaction;

@@ -3,13 +3,14 @@ package dev.almuntex.bankapi.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
 public class Transaction {
 
     private String id;
-    private Integer amount;
+    private BigDecimal amount;
     private String reference;
     @JsonProperty("date_created")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mmZ")
@@ -20,7 +21,7 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(Integer amount, String reference, String bankSlogan) {
+    public Transaction(BigDecimal amount, String reference, String bankSlogan) {
         this.id = UUID.randomUUID().toString();
         this.amount = amount;
         this.reference = reference;
@@ -36,11 +37,11 @@ public class Transaction {
         this.id = id;
     }
 
-    public Integer getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
