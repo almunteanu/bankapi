@@ -23,8 +23,12 @@ public class TransactionService {
         return transactions;
     }
 
-    public Transaction create(BigDecimal amount, String reference) {
-        Transaction transaction = new Transaction(amount, reference, bankSlogan);
+    public List<Transaction> findByUserId(String userId) {
+        return transactions.stream().filter(t -> t.getUserId().equals(userId)).toList();
+    }
+
+    public Transaction create(String userId, BigDecimal amount, String reference) {
+        Transaction transaction = new Transaction(userId, amount, reference, bankSlogan);
         transactions.add(transaction);
         return transaction;
     }

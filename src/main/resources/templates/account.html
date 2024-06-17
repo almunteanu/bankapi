@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account</title>
+</head>
+<body>
+<h2>Welcome, <span th:text="${userId}" th:remove="tag">[Username]</span>!</h2>
+<p>Your transactions:</p>
+<div th:if="${not#lists.isEmpty(transactions)}">
+    <table>
+        <tr>
+            <th>Amount</th>
+            <th>Reference</th>
+            <th>Date created</th>
+        </tr>
+        <tr th:each="transaction : ${transactions}">
+            <td th:text="${transaction.amount}"></td>
+            <td th:text="${transaction.reference}"></td>
+            <td th:text="${#temporals.format(transaction.dateCreated, 'dd-MM-yyyy HH:mm')}"></td>
+        </tr>
+    </table>
+</div>
+<hr/>
+<div>
+    <h4>Add new transaction:</h4>
+    <form th:action="@{/account/{id}(id=${userId})}" th:object="${createTransactionForm}" method="post">
+        <p>Receiving User ID: <input type="text" th:field="*{receivingUserId}"/></p>
+        <p style="background-color:red" th:if="${#fields.hasErrors('receivingUserId')}" th:errors="*{receivingUserId}"></p>
+        <p>Amount: <input type="number" th:field="*{amount}"/></p>
+        <p style="background-color:red" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></p>
+        <p>Reference: <input type="text" th:field="*{reference}"/></p>
+        <p style="background-color:red" th:if="${#fields.hasErrors('reference')}" th:errors="*{reference}"></p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
+</div>
+</body>
+</html>

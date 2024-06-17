@@ -10,6 +10,8 @@ import java.util.UUID;
 public class Transaction {
 
     private String id;
+    @JsonProperty("user_id")
+    private String userId;
     private BigDecimal amount;
     private String reference;
     @JsonProperty("date_created")
@@ -21,8 +23,9 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(BigDecimal amount, String reference, String bankSlogan) {
+    public Transaction(String userId, BigDecimal amount, String reference, String bankSlogan) {
         this.id = UUID.randomUUID().toString();
+        this.userId = userId;
         this.amount = amount;
         this.reference = reference;
         this.dateCreated = ZonedDateTime.now();
@@ -35,6 +38,14 @@ public class Transaction {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public BigDecimal getAmount() {

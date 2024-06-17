@@ -9,11 +9,23 @@ import java.util.List;
 
 public class TransactionDto {
 
+    @NotBlank
+    @JsonProperty("receiving_user_id")
+    private String receivingUserId;
+
     @DecimalMin("0.01")
     private BigDecimal amount;
 
     @NotBlank
     private String reference;
+
+    public String getReceivingUserId() {
+        return receivingUserId;
+    }
+
+    public void setReceivingUserId(String receivingUserId) {
+        this.receivingUserId = receivingUserId;
+    }
 
     public BigDecimal getAmount() {
         return amount;
