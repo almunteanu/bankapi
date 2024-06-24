@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 public class Transaction {
@@ -16,19 +16,19 @@ public class Transaction {
     private String reference;
     @JsonProperty("date_created")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mmZ")
-    private ZonedDateTime dateCreated;
+    private OffsetDateTime dateCreated;
     @JsonProperty("bank_slogan")
     private String bankSlogan;
 
     public Transaction() {
     }
 
-    public Transaction(String userId, BigDecimal amount, String reference, String bankSlogan) {
+    public Transaction(String userId, BigDecimal amount, String reference, OffsetDateTime dateCreated, String bankSlogan) {
         this.id = UUID.randomUUID().toString();
         this.userId = userId;
         this.amount = amount;
         this.reference = reference;
-        this.dateCreated = ZonedDateTime.now();
+        this.dateCreated = dateCreated;
         this.bankSlogan = bankSlogan;
     }
 
@@ -64,11 +64,11 @@ public class Transaction {
         this.reference = reference;
     }
 
-    public ZonedDateTime getDateCreated() {
+    public OffsetDateTime getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(ZonedDateTime dateCreated) {
+    public void setDateCreated(OffsetDateTime dateCreated) {
         this.dateCreated = dateCreated;
     }
 

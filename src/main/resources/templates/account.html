@@ -27,7 +27,7 @@
     <form th:action="@{/account/{id}(id=${userId})}" th:object="${createTransactionForm}" method="post">
         <p>Receiving User ID: <input type="text" th:field="*{receivingUserId}"/></p>
         <p style="background-color:red" th:if="${#fields.hasErrors('receivingUserId')}" th:errors="*{receivingUserId}"></p>
-        <p>Amount: <input type="number" th:field="*{amount}"/></p>
+        <p>Amount: <input type="number" step="0.01" th:field="*{amount}"/></p>
         <p style="background-color:red" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}"></p>
         <p>Reference: <input type="text" th:field="*{reference}"/></p>
         <p style="background-color:red" th:if="${#fields.hasErrors('reference')}" th:errors="*{reference}"></p>

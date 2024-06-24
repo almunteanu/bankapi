@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 
 @RestController
@@ -28,6 +30,6 @@ public class TransactionController {
     @PostMapping("/transactions")
     public Transaction createTransaction(@RequestBody @Valid TransactionDto transactionDto) {
         return transactionService.create(transactionDto.getReceivingUserId(), transactionDto.getAmount(),
-                transactionDto.getReference());
+                transactionDto.getReference(), OffsetDateTime.now(ZoneOffset.of("+03:00")));
     }
 }

@@ -1,11 +1,12 @@
 package dev.almuntex.bankapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 public class TransactionDto {
 
@@ -14,6 +15,8 @@ public class TransactionDto {
     private String receivingUserId;
 
     @DecimalMin("0.01")
+    @DecimalMax("99.99")
+    @Digits(integer = 2, fraction = 2)
     private BigDecimal amount;
 
     @NotBlank
@@ -41,33 +44,5 @@ public class TransactionDto {
 
     public void setReference(String reference) {
         this.reference = reference;
-    }
-
-    public static class ValidationErrorDto {
-
-        private String message;
-        @JsonProperty("invalid_fields")
-        private List<String> invalidFields;
-
-        public ValidationErrorDto(String message, List<String> invalidFields) {
-            this.message = message;
-            this.invalidFields = invalidFields;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-
-        public void setMessage(String message) {
-            this.message = message;
-        }
-
-        public List<String> getInvalidFields() {
-            return invalidFields;
-        }
-
-        public void setInvalidFields(List<String> invalidFields) {
-            this.invalidFields = invalidFields;
-        }
     }
 }

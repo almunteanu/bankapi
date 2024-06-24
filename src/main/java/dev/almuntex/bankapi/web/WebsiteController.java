@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+
 @Controller
 public class WebsiteController {
 
@@ -46,7 +49,8 @@ public class WebsiteController {
             return "account.html";
         }
 
-        transactionService.create(form.getReceivingUserId(), form.getAmount(), form.getReference());
+        transactionService.create(form.getReceivingUserId(), form.getAmount(), form.getReference(),
+                OffsetDateTime.now(ZoneOffset.of("+03:00")));
 
         return "redirect:/account/" + userId;
     }
